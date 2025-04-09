@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "442552611868",
+    "project_id": "back-buddy-lezn34",
+    "storage_bucket": "back-buddy-lezn34.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442552611868:android:c59ddc3ff5ef84961b5bd9",
+        "android_client_info": {
+          "package_name": "com.mycompany.backbuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU5PylxtZCUMbFh_54ND9b03mKxEPlGlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
