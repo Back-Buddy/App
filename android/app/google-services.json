@@ -12,7 +12,20 @@
           "package_name": "com.mycompany.backbuddy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "442552611868-ejhfip9ahp9htbcd20qtms12mdtgudse.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.backbuddy",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "442552611868-hfpgjvliiejqf32m8dgqe6mkd2n6771m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAU5PylxtZCUMbFh_54ND9b03mKxEPlGlk"
@@ -20,7 +33,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442552611868-hfpgjvliiejqf32m8dgqe6mkd2n6771m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "442552611868-09076kfr64ofko1jd0pm7n3jgj7hf6r5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.backbuddy"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442552611868:android:41e2d32b7d720c311b5bd9",
+        "android_client_info": {
+          "package_name": "ms.backbuddy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442552611868-bi48ffefaaupe4vusoltrnjv8bl8l1gf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ms.backbuddy.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "442552611868-hfpgjvliiejqf32m8dgqe6mkd2n6771m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU5PylxtZCUMbFh_54ND9b03mKxEPlGlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442552611868-hfpgjvliiejqf32m8dgqe6mkd2n6771m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "442552611868-09076kfr64ofko1jd0pm7n3jgj7hf6r5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.backbuddy"
+              }
+            }
+          ]
         }
       }
     }

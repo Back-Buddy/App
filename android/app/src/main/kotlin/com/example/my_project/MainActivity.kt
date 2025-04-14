@@ -1,4 +1,4 @@
-package com.mycompany.backbuddy
+package ms.backbuddy.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>442552611868-b5d7e05f7s688en6ue1o6328ffaic90g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.442552611868-b5d7e05f7s688en6ue1o6328ffaic90g</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>442552611868-bi48ffefaaupe4vusoltrnjv8bl8l1gf.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBJ-nz0czcppDSBkOptkQk36kEl204iUF0</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mycompany.backbuddy</string>
+	<string>ms.backbuddy.app</string>
 	<key>PROJECT_ID</key>
 	<string>back-buddy-lezn34</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:442552611868:ios:b1351e263dc422c31b5bd9</string>
+	<string>1:442552611868:ios:5a6837fe29e636d01b5bd9</string>
 </dict>
 </plist>
