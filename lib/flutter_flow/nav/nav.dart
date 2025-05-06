@@ -75,18 +75,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : LoginPageWidget(),
+          appStateNotifier.loggedIn ? BackBuddyHomeWidget() : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : LoginPageWidget(),
-        ),
-        FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? BackBuddyHomeWidget()
+              : LoginPageWidget(),
         ),
         FFRoute(
           name: LoginPageWidget.routeName,
@@ -97,6 +93,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SignUpPageWidget.routeName,
           path: SignUpPageWidget.routePath,
           builder: (context, params) => SignUpPageWidget(),
+        ),
+        FFRoute(
+          name: PasswordResetWidget.routeName,
+          path: PasswordResetWidget.routePath,
+          builder: (context, params) => PasswordResetWidget(),
+        ),
+        FFRoute(
+          name: BackBuddyHomeWidget.routeName,
+          path: BackBuddyHomeWidget.routePath,
+          builder: (context, params) => BackBuddyHomeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -215,6 +221,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    List<String>? collectionNamePath,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -232,6 +239,7 @@ class FFParameters {
       param,
       type,
       isList,
+      collectionNamePath: collectionNamePath,
     );
   }
 }
