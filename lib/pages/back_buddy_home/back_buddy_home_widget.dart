@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/user/profile_slideout_component/profile_slideout_component_widget.dart';
+import '/profile/profile_page/profile_slideout_component/profile_slideout_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'back_buddy_home_model.dart';

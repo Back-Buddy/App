@@ -1,33 +1,36 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/profile/manage_devices/device_secret_component_new/device_secret_component_new_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/index.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'google_username_component_model.dart';
-export 'google_username_component_model.dart';
+import 'new_device_name_component_model.dart';
+export 'new_device_name_component_model.dart';
 
-class GoogleUsernameComponentWidget extends StatefulWidget {
-  const GoogleUsernameComponentWidget({
+class NewDeviceNameComponentWidget extends StatefulWidget {
+  const NewDeviceNameComponentWidget({
     super.key,
     this.componentText,
-  });
+    bool? update,
+    this.deviceID,
+  }) : this.update = update ?? false;
 
   final String? componentText;
+  final bool update;
+  final String? deviceID;
 
   @override
-  State<GoogleUsernameComponentWidget> createState() =>
-      _GoogleUsernameComponentWidgetState();
+  State<NewDeviceNameComponentWidget> createState() =>
+      _NewDeviceNameComponentWidgetState();
 }
 
-class _GoogleUsernameComponentWidgetState
-    extends State<GoogleUsernameComponentWidget> {
-  late GoogleUsernameComponentModel _model;
+class _NewDeviceNameComponentWidgetState
+    extends State<NewDeviceNameComponentWidget> {
+  late NewDeviceNameComponentModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -38,10 +41,10 @@ class _GoogleUsernameComponentWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GoogleUsernameComponentModel());
+    _model = createModel(context, () => NewDeviceNameComponentModel());
 
-    _model.usernameTextController ??= TextEditingController();
-    _model.usernameFocusNode ??= FocusNode();
+    _model.deviceNameTextController ??= TextEditingController();
+    _model.deviceNameFocusNode ??= FocusNode();
   }
 
   @override
@@ -100,7 +103,7 @@ class _GoogleUsernameComponentWidgetState
                     ),
               ),
               Text(
-                'Please choose a username for your account.',
+                'Please choose a name for your device',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       font: GoogleFonts.inter(
@@ -117,14 +120,14 @@ class _GoogleUsernameComponentWidgetState
                     ),
               ),
               TextFormField(
-                controller: _model.usernameTextController,
-                focusNode: _model.usernameFocusNode,
+                controller: _model.deviceNameTextController,
+                focusNode: _model.deviceNameFocusNode,
                 autofocus: false,
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'Device Name',
                   labelStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                         font: GoogleFonts.inter(
                           fontWeight: FlutterFlowTheme.of(context)
@@ -198,8 +201,8 @@ class _GoogleUsernameComponentWidgetState
                           FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                     ),
                 minLines: 1,
-                validator:
-                    _model.usernameTextControllerValidator.asValidator(context),
+                validator: _model.deviceNameTextControllerValidator
+                    .asValidator(context),
                 inputFormatters: [
                   if (!isAndroid && !isiOS)
                     TextInputFormatter.withFunction((oldValue, newValue) {
@@ -211,99 +214,111 @@ class _GoogleUsernameComponentWidgetState
                     }),
                 ],
               ),
-              FFButtonWidget(
-                onPressed: () async {
-                  var _shouldSetState = false;
-                  if (!functions
-                      .isUsernameValid(_model.usernameTextController.text)!) {
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Username Invalid'),
-                          content: Text(
-                              'The Username you entered is invalid. Usernames may only contain letters and numbers and be a maxium of 16 characters long.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
+              Builder(
+                builder: (context) => FFButtonWidget(
+                  onPressed: () async {
+                    var _shouldSetState = false;
+                    if (!functions.isUsernameValid(
+                        _model.deviceNameTextController.text)!) {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Username Invalid'),
+                            content: Text(
+                                'The Username you entered is invalid. Usernames may only contain letters and numbers and be a maxium of 16 characters long.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Ok'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      if (_shouldSetState) safeSetState(() {});
+                      return;
+                    }
+                    if (widget.update == true) {
+                      _model.apiResult88x = await BackBuddyAPIGroup
+                          .apivDeviceidPATCHNAMECall
+                          .call(
+                        name: _model.deviceNameTextController.text,
+                        id: widget.deviceID,
+                        authToken: currentJwtToken,
+                      );
+
+                      _shouldSetState = true;
+                      if ((_model.apiResult88x?.succeeded ?? true)) {
+                        context.safePop();
+                      }
+                    } else {
+                      _model.newDeviceResult =
+                          await BackBuddyAPIGroup.apiV1DevicePOSTCall.call(
+                        authToken: currentJwtToken,
+                        deviceName: _model.deviceNameTextController.text,
+                      );
+
+                      _shouldSetState = true;
+                      if (_model.newDeviceResult != null) {
+                        await showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              child: DeviceSecretComponentNewWidget(
+                                deviceSecret: getJsonField(
+                                  (_model.newDeviceResult?.jsonBody ?? ''),
+                                  r'''$.secret''',
+                                ).toString(),
+                              ),
+                            );
+                          },
                         );
-                      },
-                    );
+
+                        context.safePop();
+                      }
+                    }
+
                     if (_shouldSetState) safeSetState(() {});
-                    return;
-                  }
-                  _model.existingUser = await queryUsersRecordOnce(
-                    queryBuilder: (usersRecord) => usersRecord.where(
-                      'display_name',
-                      isEqualTo: _model.usernameTextController.text,
-                    ),
-                    singleRecord: true,
-                  ).then((s) => s.firstOrNull);
-                  _shouldSetState = true;
-                  if (_model.existingUser?.uid != null &&
-                      _model.existingUser?.uid != '') {
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Username Invalid'),
-                          content: Text('Username is already taken!'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                    if (_shouldSetState) safeSetState(() {});
-                    return;
-                  }
-
-                  await currentUserReference!.update(createUsersRecordData(
-                    displayName: _model.usernameTextController.text,
-                    usernameSet: true,
-                  ));
-
-                  context.pushNamed(BackBuddyHomeWidget.routeName);
-
-                  if (_shouldSetState) safeSetState(() {});
-                },
-                text: 'Continue',
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 50.0,
-                  padding: EdgeInsets.all(8.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        font: GoogleFonts.plusJakartaSans(
+                  },
+                  text: 'Continue',
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 50.0,
+                    padding: EdgeInsets.all(8.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.plusJakartaSans(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          color: FlutterFlowTheme.of(context).info,
+                          letterSpacing: 0.0,
                           fontWeight: FlutterFlowTheme.of(context)
                               .titleSmall
                               .fontWeight,
                           fontStyle:
                               FlutterFlowTheme.of(context).titleSmall.fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).info,
-                        letterSpacing: 0.0,
-                        fontWeight:
-                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
-                        fontStyle:
-                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                      ),
-                  elevation: 0.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
-                  borderRadius: BorderRadius.circular(25.0),
                 ),
               ),
             ].divide(SizedBox(height: 16.0)),

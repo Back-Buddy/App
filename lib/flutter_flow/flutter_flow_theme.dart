@@ -89,34 +89,49 @@ abstract class FlutterFlowTheme {
   TextStyle get bodyText2 => typography.bodySmall;
 
   String get displayLargeFamily => typography.displayLargeFamily;
+  bool get displayLargeIsCustom => typography.displayLargeIsCustom;
   TextStyle get displayLarge => typography.displayLarge;
   String get displayMediumFamily => typography.displayMediumFamily;
+  bool get displayMediumIsCustom => typography.displayMediumIsCustom;
   TextStyle get displayMedium => typography.displayMedium;
   String get displaySmallFamily => typography.displaySmallFamily;
+  bool get displaySmallIsCustom => typography.displaySmallIsCustom;
   TextStyle get displaySmall => typography.displaySmall;
   String get headlineLargeFamily => typography.headlineLargeFamily;
+  bool get headlineLargeIsCustom => typography.headlineLargeIsCustom;
   TextStyle get headlineLarge => typography.headlineLarge;
   String get headlineMediumFamily => typography.headlineMediumFamily;
+  bool get headlineMediumIsCustom => typography.headlineMediumIsCustom;
   TextStyle get headlineMedium => typography.headlineMedium;
   String get headlineSmallFamily => typography.headlineSmallFamily;
+  bool get headlineSmallIsCustom => typography.headlineSmallIsCustom;
   TextStyle get headlineSmall => typography.headlineSmall;
   String get titleLargeFamily => typography.titleLargeFamily;
+  bool get titleLargeIsCustom => typography.titleLargeIsCustom;
   TextStyle get titleLarge => typography.titleLarge;
   String get titleMediumFamily => typography.titleMediumFamily;
+  bool get titleMediumIsCustom => typography.titleMediumIsCustom;
   TextStyle get titleMedium => typography.titleMedium;
   String get titleSmallFamily => typography.titleSmallFamily;
+  bool get titleSmallIsCustom => typography.titleSmallIsCustom;
   TextStyle get titleSmall => typography.titleSmall;
   String get labelLargeFamily => typography.labelLargeFamily;
+  bool get labelLargeIsCustom => typography.labelLargeIsCustom;
   TextStyle get labelLarge => typography.labelLarge;
   String get labelMediumFamily => typography.labelMediumFamily;
+  bool get labelMediumIsCustom => typography.labelMediumIsCustom;
   TextStyle get labelMedium => typography.labelMedium;
   String get labelSmallFamily => typography.labelSmallFamily;
+  bool get labelSmallIsCustom => typography.labelSmallIsCustom;
   TextStyle get labelSmall => typography.labelSmall;
   String get bodyLargeFamily => typography.bodyLargeFamily;
+  bool get bodyLargeIsCustom => typography.bodyLargeIsCustom;
   TextStyle get bodyLarge => typography.bodyLarge;
   String get bodyMediumFamily => typography.bodyMediumFamily;
+  bool get bodyMediumIsCustom => typography.bodyMediumIsCustom;
   TextStyle get bodyMedium => typography.bodyMedium;
   String get bodySmallFamily => typography.bodySmallFamily;
+  bool get bodySmallIsCustom => typography.bodySmallIsCustom;
   TextStyle get bodySmall => typography.bodySmall;
 
   Typography get typography => ThemeTypography(this);
@@ -153,34 +168,49 @@ class LightModeTheme extends FlutterFlowTheme {
 
 abstract class Typography {
   String get displayLargeFamily;
+  bool get displayLargeIsCustom;
   TextStyle get displayLarge;
   String get displayMediumFamily;
+  bool get displayMediumIsCustom;
   TextStyle get displayMedium;
   String get displaySmallFamily;
+  bool get displaySmallIsCustom;
   TextStyle get displaySmall;
   String get headlineLargeFamily;
+  bool get headlineLargeIsCustom;
   TextStyle get headlineLarge;
   String get headlineMediumFamily;
+  bool get headlineMediumIsCustom;
   TextStyle get headlineMedium;
   String get headlineSmallFamily;
+  bool get headlineSmallIsCustom;
   TextStyle get headlineSmall;
   String get titleLargeFamily;
+  bool get titleLargeIsCustom;
   TextStyle get titleLarge;
   String get titleMediumFamily;
+  bool get titleMediumIsCustom;
   TextStyle get titleMedium;
   String get titleSmallFamily;
+  bool get titleSmallIsCustom;
   TextStyle get titleSmall;
   String get labelLargeFamily;
+  bool get labelLargeIsCustom;
   TextStyle get labelLarge;
   String get labelMediumFamily;
+  bool get labelMediumIsCustom;
   TextStyle get labelMedium;
   String get labelSmallFamily;
+  bool get labelSmallIsCustom;
   TextStyle get labelSmall;
   String get bodyLargeFamily;
+  bool get bodyLargeIsCustom;
   TextStyle get bodyLarge;
   String get bodyMediumFamily;
+  bool get bodyMediumIsCustom;
   TextStyle get bodyMedium;
   String get bodySmallFamily;
+  bool get bodySmallIsCustom;
   TextStyle get bodySmall;
 }
 
@@ -190,90 +220,105 @@ class ThemeTypography extends Typography {
   final FlutterFlowTheme theme;
 
   String get displayLargeFamily => 'Plus Jakarta Sans';
+  bool get displayLargeIsCustom => false;
   TextStyle get displayLarge => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
   String get displayMediumFamily => 'Plus Jakarta Sans';
+  bool get displayMediumIsCustom => false;
   TextStyle get displayMedium => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
   String get displaySmallFamily => 'Plus Jakarta Sans';
+  bool get displaySmallIsCustom => false;
   TextStyle get displaySmall => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
   String get headlineLargeFamily => 'Plus Jakarta Sans';
+  bool get headlineLargeIsCustom => false;
   TextStyle get headlineLarge => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
   String get headlineMediumFamily => 'Plus Jakarta Sans';
+  bool get headlineMediumIsCustom => false;
   TextStyle get headlineMedium => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
   String get headlineSmallFamily => 'Plus Jakarta Sans';
+  bool get headlineSmallIsCustom => false;
   TextStyle get headlineSmall => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
   String get titleLargeFamily => 'Plus Jakarta Sans';
+  bool get titleLargeIsCustom => false;
   TextStyle get titleLarge => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
   String get titleMediumFamily => 'Plus Jakarta Sans';
+  bool get titleMediumIsCustom => false;
   TextStyle get titleMedium => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
   String get titleSmallFamily => 'Plus Jakarta Sans';
+  bool get titleSmallIsCustom => false;
   TextStyle get titleSmall => GoogleFonts.plusJakartaSans(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
   String get labelLargeFamily => 'Inter';
+  bool get labelLargeIsCustom => false;
   TextStyle get labelLarge => GoogleFonts.inter(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
   String get labelMediumFamily => 'Inter';
+  bool get labelMediumIsCustom => false;
   TextStyle get labelMedium => GoogleFonts.inter(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
   String get labelSmallFamily => 'Inter';
+  bool get labelSmallIsCustom => false;
   TextStyle get labelSmall => GoogleFonts.inter(
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
   String get bodyLargeFamily => 'Inter';
+  bool get bodyLargeIsCustom => false;
   TextStyle get bodyLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Inter';
+  bool get bodyMediumIsCustom => false;
   TextStyle get bodyMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
   String get bodySmallFamily => 'Inter';
+  bool get bodySmallIsCustom => false;
   TextStyle get bodySmall => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
@@ -323,6 +368,7 @@ extension TextStyleHelper on TextStyle {
     TextDecoration? decoration,
     double? lineHeight,
     List<Shadow>? shadows,
+    String? package,
   }) {
     if (useGoogleFonts && fontFamily != null) {
       font = GoogleFonts.getFont(fontFamily,
@@ -343,6 +389,7 @@ extension TextStyleHelper on TextStyle {
           )
         : copyWith(
             fontFamily: fontFamily,
+            package: package,
             color: color,
             fontSize: fontSize,
             letterSpacing: letterSpacing,
