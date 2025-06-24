@@ -1,11 +1,14 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/profile/manage_devices/dynamic_devices_component/dynamic_devices_component_widget.dart';
 import '/profile/manage_devices/new_device_name_component/new_device_name_component_widget.dart';
+import '/profile/manage_devices/render_list_of_devices_component/render_list_of_devices_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'manage_devices_component_model.dart';
 export 'manage_devices_component_model.dart';
 
@@ -64,7 +67,7 @@ class _ManageDevicesComponentWidgetState
           ],
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-            color: FlutterFlowTheme.of(context).primaryBackground,
+            color: FlutterFlowTheme.of(context).alternate,
           ),
         ),
         child: Padding(
@@ -79,7 +82,7 @@ class _ManageDevicesComponentWidgetState
                   Text(
                     'Manage Devices',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
-                          font: GoogleFonts.plusJakartaSans(
+                          font: GoogleFonts.baloo2(
                             fontWeight: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .fontWeight,
@@ -142,15 +145,74 @@ class _ManageDevicesComponentWidgetState
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.dynamicDevicesComponentModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: DynamicDevicesComponentWidget(),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      RefreshIndicator(
+                        onRefresh: () async {
+                          safeSetState(
+                              () => _model.listViewPagingController?.refresh());
+                          await _model.waitForOnePageForListView();
+                        },
+                        child: PagedListView<ApiPagingParams, dynamic>(
+                          pagingController: _model.setListViewController(
+                            (nextPageMarker) =>
+                                BackBuddyAPIGroup.apivDeviceGETCall.call(
+                              authToken: currentJwtToken,
+                              size: 10,
+                              page: nextPageMarker.nextPageNumber + 1,
+                            ),
+                          ),
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          reverse: false,
+                          scrollDirection: Axis.vertical,
+                          builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                            // Customize what your widget looks like when it's loading the first page.
+                            firstPageProgressIndicatorBuilder: (_) => Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Customize what your widget looks like when it's loading another page.
+                            newPageProgressIndicatorBuilder: (_) => Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            itemBuilder: (context, _, deviceIndex) {
+                              final deviceItem = _model
+                                  .listViewPagingController!
+                                  .itemList![deviceIndex];
+                              return RenderListOfDevicesComponentWidget(
+                                key: Key(
+                                    'Keyhie_${deviceIndex}_of_${_model.listViewPagingController!.itemList!.length}'),
+                                activeState: deviceItem.active,
+                                name: deviceItem.name,
+                                threshold: deviceItem.threshold,
+                                deviceID: deviceItem.id,
+                                connectedState: deviceItem.online,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Spacer(),
@@ -179,11 +241,14 @@ class _ManageDevicesComponentWidgetState
                                 );
                               },
                             );
+
+                            safeSetState(() =>
+                                _model.listViewPagingController?.refresh());
+                            await _model.waitForOnePageForListView();
                           },
                           text: 'Add new device',
                           icon: Icon(
                             Icons.bluetooth_searching,
-                            color: FlutterFlowTheme.of(context).info,
                             size: 15.0,
                           ),
                           options: FFButtonOptions(
@@ -192,11 +257,13 @@ class _ManageDevicesComponentWidgetState
                             padding: EdgeInsets.all(8.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
+                            iconColor:
+                                FlutterFlowTheme.of(context).secondaryText,
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  font: GoogleFonts.plusJakartaSans(
+                                  font: GoogleFonts.baloo2(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .fontWeight,
@@ -204,7 +271,8 @@ class _ManageDevicesComponentWidgetState
                                         .titleSmall
                                         .fontStyle,
                                   ),
-                                  color: FlutterFlowTheme.of(context).info,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleSmall

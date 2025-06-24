@@ -16,9 +16,11 @@ class GoogleUsernameComponentWidget extends StatefulWidget {
   const GoogleUsernameComponentWidget({
     super.key,
     this.componentText,
-  });
+    bool? update,
+  }) : this.update = update ?? false;
 
   final String? componentText;
+  final bool update;
 
   @override
   State<GoogleUsernameComponentWidget> createState() =>
@@ -72,7 +74,7 @@ class _GoogleUsernameComponentWidgetState
           ],
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-            color: FlutterFlowTheme.of(context).primaryBackground,
+            color: FlutterFlowTheme.of(context).alternate,
           ),
         ),
         child: Padding(
@@ -84,7 +86,7 @@ class _GoogleUsernameComponentWidgetState
                 'Almost there!',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
-                      font: GoogleFonts.plusJakartaSans(
+                      font: GoogleFonts.baloo2(
                         fontWeight: FlutterFlowTheme.of(context)
                             .headlineSmall
                             .fontWeight,
@@ -109,6 +111,7 @@ class _GoogleUsernameComponentWidgetState
                         fontStyle:
                             FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       letterSpacing: 0.0,
                       fontWeight:
                           FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -214,8 +217,25 @@ class _GoogleUsernameComponentWidgetState
               FFButtonWidget(
                 onPressed: () async {
                   var _shouldSetState = false;
-                  if (!functions
+                  _model.existingUser = await queryUsersRecordOnce(
+                    queryBuilder: (usersRecord) => usersRecord.where(
+                      'display_name_upper',
+                      isEqualTo:
+                          functions.toUpper(_model.usernameTextController.text),
+                    ),
+                    singleRecord: true,
+                  ).then((s) => s.firstOrNull);
+                  _shouldSetState = true;
+                  if (functions
                       .isUsernameValid(_model.usernameTextController.text)!) {
+                    await queryUsersRecordOnce(
+                      queryBuilder: (usersRecord) => usersRecord.where(
+                        'display_name',
+                        isEqualTo: _model.usernameTextController.text,
+                      ),
+                      singleRecord: true,
+                    ).then((s) => s.firstOrNull);
+                  } else {
                     await showDialog(
                       context: context,
                       builder: (alertDialogContext) {
@@ -236,14 +256,7 @@ class _GoogleUsernameComponentWidgetState
                     if (_shouldSetState) safeSetState(() {});
                     return;
                   }
-                  _model.existingUser = await queryUsersRecordOnce(
-                    queryBuilder: (usersRecord) => usersRecord.where(
-                      'display_name',
-                      isEqualTo: _model.usernameTextController.text,
-                    ),
-                    singleRecord: true,
-                  ).then((s) => s.firstOrNull);
-                  _shouldSetState = true;
+
                   if (_model.existingUser?.uid != null &&
                       _model.existingUser?.uid != '') {
                     await showDialog(
@@ -269,9 +282,14 @@ class _GoogleUsernameComponentWidgetState
                   await currentUserReference!.update(createUsersRecordData(
                     displayName: _model.usernameTextController.text,
                     usernameSet: true,
+                    displayNameUpper:
+                        functions.toUpper(_model.usernameTextController.text),
                   ));
-
-                  context.pushNamed(BackBuddyHomeWidget.routeName);
+                  if (widget.update) {
+                    Navigator.pop(context);
+                  } else {
+                    context.pushNamed(BackBuddyHomeFeedWidget.routeName);
+                  }
 
                   if (_shouldSetState) safeSetState(() {});
                 },
@@ -284,14 +302,14 @@ class _GoogleUsernameComponentWidgetState
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        font: GoogleFonts.plusJakartaSans(
+                        font: GoogleFonts.baloo2(
                           fontWeight: FlutterFlowTheme.of(context)
                               .titleSmall
                               .fontWeight,
                           fontStyle:
                               FlutterFlowTheme.of(context).titleSmall.fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).info,
+                        color: FlutterFlowTheme.of(context).primaryText,
                         letterSpacing: 0.0,
                         fontWeight:
                             FlutterFlowTheme.of(context).titleSmall.fontWeight,

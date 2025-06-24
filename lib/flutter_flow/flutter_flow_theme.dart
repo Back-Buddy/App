@@ -58,6 +58,7 @@ abstract class FlutterFlowTheme {
 
   late Color buttonON;
   late Color buttonOFF;
+  late Color customColor1;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -145,25 +146,26 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
-  late Color secondary = const Color(0xFF39D2C0);
-  late Color tertiary = const Color(0xFFEE8B60);
-  late Color alternate = const Color(0xFFE0E3E7);
-  late Color primaryText = const Color(0xFF14181B);
-  late Color secondaryText = const Color(0xFF57636C);
-  late Color primaryBackground = const Color(0xFFF1F4F8);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color accent1 = const Color(0x4C4B39EF);
-  late Color accent2 = const Color(0x4D39D2C0);
-  late Color accent3 = const Color(0x4DEE8B60);
-  late Color accent4 = const Color(0xCCFFFFFF);
-  late Color success = const Color(0xFF249689);
-  late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0xFFFF5963);
-  late Color info = const Color(0xFFFFFFFF);
+  late Color primary = const Color(0xFFFF4A00);
+  late Color secondary = const Color(0xFF3D3D3D);
+  late Color tertiary = const Color(0xFFFFB300);
+  late Color alternate = const Color(0xFFF5F5F5);
+  late Color primaryText = const Color(0xFF000000);
+  late Color secondaryText = const Color(0xFF4A4A4A);
+  late Color primaryBackground = const Color(0xFFFFFFFF);
+  late Color secondaryBackground = const Color(0xFFF7F7F7);
+  late Color accent1 = const Color(0xFFFF6F00);
+  late Color accent2 = const Color(0xFFFFCA28);
+  late Color accent3 = const Color(0xFFFFAB00);
+  late Color accent4 = const Color(0xFFFF8F00);
+  late Color success = const Color(0xFF4CAF50);
+  late Color warning = const Color(0xFFFF9800);
+  late Color error = const Color(0xFFF44336);
+  late Color info = const Color(0xFF2196F3);
 
-  late Color buttonON = Color(0xFF4B39EF);
-  late Color buttonOFF = Color(0xFFF8B9B9);
+  late Color buttonON = const Color(0xFF4B39EF);
+  late Color buttonOFF = const Color(0xFFF8B9B9);
+  late Color customColor1 = const Color(0xFF1D9899);
 }
 
 abstract class Typography {
@@ -219,65 +221,65 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Plus Jakarta Sans';
+  String get displayLargeFamily => 'Baloo 2';
   bool get displayLargeIsCustom => false;
-  TextStyle get displayLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get displayLarge => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Plus Jakarta Sans';
+  String get displayMediumFamily => 'Baloo 2';
   bool get displayMediumIsCustom => false;
-  TextStyle get displayMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get displayMedium => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Plus Jakarta Sans';
+  String get displaySmallFamily => 'Baloo 2';
   bool get displaySmallIsCustom => false;
-  TextStyle get displaySmall => GoogleFonts.plusJakartaSans(
+  TextStyle get displaySmall => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Plus Jakarta Sans';
+  String get headlineLargeFamily => 'Baloo 2';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get headlineLarge => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Plus Jakarta Sans';
+  String get headlineMediumFamily => 'Baloo 2';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get headlineMedium => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Plus Jakarta Sans';
+  String get headlineSmallFamily => 'Baloo 2';
   bool get headlineSmallIsCustom => false;
-  TextStyle get headlineSmall => GoogleFonts.plusJakartaSans(
+  TextStyle get headlineSmall => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Plus Jakarta Sans';
+  String get titleLargeFamily => 'Baloo 2';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get titleLarge => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Plus Jakarta Sans';
+  String get titleMediumFamily => 'Baloo 2';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get titleMedium => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Plus Jakarta Sans';
+  String get titleSmallFamily => 'Baloo 2';
   bool get titleSmallIsCustom => false;
-  TextStyle get titleSmall => GoogleFonts.plusJakartaSans(
+  TextStyle get titleSmall => GoogleFonts.baloo2(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
@@ -334,25 +336,26 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
-  late Color secondary = const Color(0xFF39D2C0);
-  late Color tertiary = const Color(0xFFEE8B60);
-  late Color alternate = const Color(0xFF262D34);
+  late Color primary = const Color(0xFFD93A00);
+  late Color secondary = const Color(0xFFE0E0E0);
+  late Color tertiary = const Color(0xFFFFC700);
+  late Color alternate = const Color(0xFF2A2A2A);
   late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF95A1AC);
-  late Color primaryBackground = const Color(0xFF1D2428);
-  late Color secondaryBackground = const Color(0xFF14181B);
-  late Color accent1 = const Color(0x4C4B39EF);
-  late Color accent2 = const Color(0x4D39D2C0);
-  late Color accent3 = const Color(0x4DEE8B60);
-  late Color accent4 = const Color(0xB2262D34);
-  late Color success = const Color(0xFF249689);
-  late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0xFFFF5963);
-  late Color info = const Color(0xFFFFFFFF);
+  late Color secondaryText = const Color(0xFFB3B3B3);
+  late Color primaryBackground = const Color(0xFF121212);
+  late Color secondaryBackground = const Color(0xFF1E1E1E);
+  late Color accent1 = const Color(0xFFFF8F00);
+  late Color accent2 = const Color(0xFFFFD600);
+  late Color accent3 = const Color(0xFFFFC400);
+  late Color accent4 = const Color(0xFFFFB300);
+  late Color success = const Color(0xFF66BB6A);
+  late Color warning = const Color(0xFFFFA726);
+  late Color error = const Color(0xFFEF5350);
+  late Color info = const Color(0xFF64B5F6);
 
-  late Color buttonON = Color(0xFF4B39EF);
-  late Color buttonOFF = Color(0xFFF8B9B9);
+  late Color buttonON = const Color(0xFF4B39EF);
+  late Color buttonOFF = const Color(0xFFF8B9B9);
+  late Color customColor1 = const Color(0xFF6223AA);
 }
 
 extension TextStyleHelper on TextStyle {

@@ -86,7 +86,7 @@ class _DeviceSecretComponentNewWidgetState
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
-                              font: GoogleFonts.plusJakartaSans(
+                              font: GoogleFonts.baloo2(
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
@@ -246,7 +246,7 @@ class _DeviceSecretComponentNewWidgetState
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.plusJakartaSans(
+                                font: GoogleFonts.baloo2(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .fontWeight,
@@ -254,7 +254,7 @@ class _DeviceSecretComponentNewWidgetState
                                       .titleSmall
                                       .fontStyle,
                                 ),
-                                color: FlutterFlowTheme.of(context).info,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 letterSpacing: 0.0,
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .titleSmall

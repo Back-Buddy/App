@@ -93,12 +93,7 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF4B39EF), Color(0xFFEE8B60)],
-              stops: [0.0, 1.0],
-              begin: AlignmentDirectional(0.87, -1.0),
-              end: AlignmentDirectional(-0.87, 1.0),
-            ),
+            color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           alignment: AlignmentDirectional(0.0, -1.0),
           child: SingleChildScrollView(
@@ -124,7 +119,7 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                   .displaySmall
                                   .fontStyle,
                             ),
-                            color: Colors.white,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 34.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
@@ -143,7 +138,7 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                       maxWidth: 570.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: FlutterFlowTheme.of(context).alternate,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4.0,
@@ -179,7 +174,8 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                             .displaySmall
                                             .fontStyle,
                                       ),
-                                      color: Color(0xFF101213),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 36.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
@@ -204,7 +200,8 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                             .labelMedium
                                             .fontStyle,
                                       ),
-                                      color: Color(0xFF57636C),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
@@ -237,7 +234,8 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                                     .labelLarge
                                                     .fontStyle,
                                           ),
-                                          color: Color(0xFF57636C),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -248,34 +246,39 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFE9EDF2),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF4B39EF),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFE0E3E7),
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFE0E3E7),
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     filled: true,
-                                    fillColor: Color(0xFFF1F4F8),
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
@@ -332,7 +335,7 @@ class _PasswordResetWidgetState extends State<PasswordResetWidget>
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF4B39EF),
+                                  color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(

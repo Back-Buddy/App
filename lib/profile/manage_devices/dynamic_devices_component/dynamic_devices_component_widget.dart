@@ -83,6 +83,7 @@ class _DynamicDevicesComponentWidgetState
                       deviceListIndex,
                     ),
                     updateCallback: () => safeSetState(() {}),
+                    updateOnChange: true,
                     child: RenderListOfDevicesComponentWidget(
                       key: Key(
                         'Keymzw_${deviceListItem.toString()}',

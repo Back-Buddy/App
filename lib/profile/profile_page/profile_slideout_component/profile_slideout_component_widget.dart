@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/profile/manage_devices/edit_single_device_component/edit_single_device_component_widget.dart';
 import '/profile/manage_devices/manage_devices_component/manage_devices_component_widget.dart';
+import '/backend/schema/structs/index.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,6 +47,7 @@ class _ProfileSlideoutComponentWidgetState
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.transparent,
       ),
@@ -86,13 +88,6 @@ class _ProfileSlideoutComponentWidgetState
                           width: 50.0,
                           height: 50.0,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).accent2,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: Image.asset(
-                                'assets/images/DALLE_2025-03-24_17.21.09_-_Minimalist_logo_design_for_a_wellness_and_posture_reminder_app_named_BackBuddy._The_logo_features_a_simple,_clean_line_art_of_a_cute_and_happy_anima.webp',
-                              ).image,
-                            ),
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
@@ -100,13 +95,30 @@ class _ProfileSlideoutComponentWidgetState
                               width: 2.0,
                             ),
                           ),
-                          child: Visibility(
-                            visible: currentUserPhoto != '',
-                            child: AuthUserStreamWidget(
-                              builder: (context) => ClipRRect(
+                          child: AuthUserStreamWidget(
+                            builder: (context) => InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  ProfilePageWidget.routeName,
+                                  queryParameters: {
+                                    'userId': serializeParam(
+                                      currentUserUid,
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              },
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
                                 child: Image.network(
-                                  currentUserPhoto,
+                                  valueOrDefault<String>(
+                                    currentUserPhoto,
+                                    'https://i.imgur.com/388erxO.png',
+                                  ),
                                   width: 50.0,
                                   height: 50.0,
                                   fit: BoxFit.cover,
@@ -126,7 +138,7 @@ class _ProfileSlideoutComponentWidgetState
                                 style: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      font: GoogleFonts.plusJakartaSans(
+                                      font: GoogleFonts.baloo2(
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .titleMedium
@@ -169,11 +181,13 @@ class _ProfileSlideoutComponentWidgetState
                       ].divide(SizedBox(width: 12.0)),
                     ),
                     FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
+                      borderRadius: 8.0,
                       buttonSize: 40.0,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       icon: Icon(
                         Icons.close_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
+                        color: FlutterFlowTheme.of(context).secondary,
                         size: 24.0,
                       ),
                       onPressed: () async {
@@ -251,6 +265,18 @@ class _ProfileSlideoutComponentWidgetState
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  if ((containerApivDeviceGETACTIVEResponse
+                                                  .jsonBody
+                                                  .toList()
+                                                  .map<DeviceDtoStruct?>(
+                                                      DeviceDtoStruct.maybeFromMap)
+                                                  .toList()
+                                              as Iterable<DeviceDtoStruct?>)
+                                          .withoutNulls
+                                          .length ==
+                                      0) {
+                                    return;
+                                  }
                                   await showDialog(
                                     context: context,
                                     builder: (dialogContext) {
@@ -465,24 +491,58 @@ class _ProfileSlideoutComponentWidgetState
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.settings_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 24.0,
-                                ),
-                                Text(
-                                  'Profile Settings',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Notifications'),
+                                  content: Text(
+                                      'Notification settings are managed by your mobile device. Please check your smartphones notification settings.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.notifications_rounded,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
+                                  ),
+                                  Text(
+                                    'Notification Settings',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -492,113 +552,17 @@ class _ProfileSlideoutComponentWidgetState
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 12.0)),
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.notifications_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 24.0,
-                                ),
-                                Text(
-                                  'Notification Settings',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 12.0)),
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.privacy_tip_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 24.0,
-                                ),
-                                Text(
-                                  'Privacy Settings',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 12.0)),
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
-                            ),
-                          ],
+                                  ),
+                                ].divide(SizedBox(width: 12.0)),
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
                         ),
                       ].divide(SizedBox(height: 12.0)),
                     ),
@@ -627,7 +591,6 @@ class _ProfileSlideoutComponentWidgetState
                       text: 'Sign Out',
                       icon: Icon(
                         Icons.logout_rounded,
-                        color: FlutterFlowTheme.of(context).error,
                         size: 15.0,
                       ),
                       options: FFButtonOptions(
@@ -636,6 +599,7 @@ class _ProfileSlideoutComponentWidgetState
                         padding: EdgeInsets.all(8.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconColor: FlutterFlowTheme.of(context).error,
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         textStyle:
                             FlutterFlowTheme.of(context).bodyMedium.override(

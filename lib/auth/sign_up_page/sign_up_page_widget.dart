@@ -115,12 +115,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                 width: 100.0,
                 height: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF4B39EF), Color(0xFFEE8B60)],
-                    stops: [0.0, 1.0],
-                    begin: AlignmentDirectional(0.87, -1.0),
-                    end: AlignmentDirectional(-0.87, 1.0),
-                  ),
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                 ),
                 alignment: AlignmentDirectional(0.0, -1.0),
                 child: SingleChildScrollView(
@@ -130,9 +125,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 70.0, 0.0, 32.0),
+                            0.0, 50.0, 0.0, 15.0),
                         child: Container(
-                          width: 200.0,
                           height: 70.0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
@@ -149,7 +143,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                         .displaySmall
                                         .fontStyle,
                                   ),
-                                  color: Colors.white,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 34.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
@@ -161,14 +156,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 16.0),
                         child: Container(
                           width: double.infinity,
                           constraints: BoxConstraints(
                             maxWidth: 570.0,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: FlutterFlowTheme.of(context).alternate,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -190,7 +186,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Get Started',
+                                    'Welcome!',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
@@ -202,8 +198,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                     .displaySmall
                                                     .fontStyle,
                                           ),
-                                          color: Color(0xFF101213),
-                                          fontSize: 36.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 30.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
@@ -221,14 +218,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
-                                            font: GoogleFonts.plusJakartaSans(
+                                            font: GoogleFonts.inter(
                                               fontWeight: FontWeight.w500,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF57636C),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
@@ -266,7 +264,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                           .labelLarge
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF57636C),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
@@ -277,7 +277,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFF1F4F8),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -285,7 +287,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFF4B39EF),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -293,7 +297,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFE0E3E7),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -302,14 +308,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           focusedErrorBorder:
                                               OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFE0E3E7),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
                                           filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
@@ -321,7 +331,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .bodyLarge
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF101213),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -363,7 +375,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                           .labelLarge
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF57636C),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
@@ -374,7 +388,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFF1F4F8),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -382,7 +398,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFF4B39EF),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -390,7 +408,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -399,14 +419,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           focusedErrorBorder:
                                               OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
                                           filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
@@ -418,7 +442,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .bodyLarge
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF101213),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -462,7 +488,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                           .labelLarge
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF57636C),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
@@ -473,7 +501,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFF1F4F8),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -481,7 +511,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFF4B39EF),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -489,7 +521,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -498,14 +532,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           focusedErrorBorder:
                                               OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
                                           filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                           suffixIcon: InkWell(
                                             onTap: () => safeSetState(
                                               () => _model.passwordVisibility =
@@ -518,7 +556,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
-                                              color: Color(0xFF57636C),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               size: 24.0,
                                             ),
                                           ),
@@ -533,7 +573,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .bodyLarge
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF101213),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -577,7 +619,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                           .labelLarge
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF57636C),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
@@ -588,7 +632,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFF1F4F8),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -596,7 +642,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFF4B39EF),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -604,7 +652,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -613,14 +663,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                           focusedErrorBorder:
                                               OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0xFFFF5963),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 2.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
                                           filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                           suffixIcon: InkWell(
                                             onTap: () => safeSetState(
                                               () => _model
@@ -635,7 +689,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
-                                              color: Color(0xFF57636C),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               size: 24.0,
                                             ),
                                           ),
@@ -650,7 +706,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .bodyLarge
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF101213),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -699,9 +757,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                             await queryUsersRecordOnce(
                                           queryBuilder: (usersRecord) =>
                                               usersRecord.where(
-                                            'display_name',
-                                            isEqualTo: _model
-                                                .usernameTextController.text,
+                                            'display_name_upper',
+                                            isEqualTo: functions.toUpper(_model
+                                                .usernameTextController.text),
                                           ),
                                           singleRecord: true,
                                         ).then((s) => s.firstOrNull);
@@ -763,10 +821,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                   .usernameTextController.text,
                                               photoUrl: '',
                                               usernameSet: true,
+                                              displayNameUpper:
+                                                  functions.toUpper(_model
+                                                      .usernameTextController
+                                                      .text),
                                             ));
 
                                         context.goNamedAuth(
-                                            BackBuddyHomeWidget.routeName,
+                                            BackBuddyHomeFeedWidget.routeName,
                                             context.mounted);
 
                                         if (_shouldSetState)
@@ -781,7 +843,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: Color(0xFF4B39EF),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
@@ -803,7 +866,6 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                             ),
                                         elevation: 3.0,
                                         borderSide: BorderSide(
-                                          color: Colors.transparent,
                                           width: 1.0,
                                         ),
                                         borderRadius:
@@ -827,7 +889,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF57636C),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
@@ -855,7 +918,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                               currentUserDocument?.usernameSet,
                                               false)) {
                                             context.pushNamedAuth(
-                                                BackBuddyHomeWidget.routeName,
+                                                BackBuddyHomeFeedWidget
+                                                    .routeName,
                                                 context.mounted);
 
                                             return;
@@ -916,7 +980,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                           .titleSmall
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF101213),
+                                                color: Color(0xFF0A0909),
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
@@ -925,9 +989,10 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                          elevation: 0.0,
+                                          elevation: 2.0,
                                           borderSide: BorderSide(
-                                            color: Color(0xFFE0E3E7),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
                                             width: 2.0,
                                           ),
                                           borderRadius:
@@ -965,7 +1030,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color: Color(0xFF4B39EF),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   fontSize: 14.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -994,7 +1061,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget>
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF101213),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               fontSize: 14.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,

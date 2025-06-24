@@ -3,10 +3,14 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/profile/manage_devices/device_log_component/device_log_component_widget.dart';
 import '/profile/manage_devices/new_device_name_component/new_device_name_component_widget.dart';
 import '/profile/manage_devices/threshold_changer_component/threshold_changer_component_widget.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'edit_single_device_component_model.dart';
 export 'edit_single_device_component_model.dart';
 
@@ -48,11 +52,15 @@ class _EditSingleDeviceComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return FutureBuilder<ApiCallResponse>(
-      future: BackBuddyAPIGroup.apiV1DeviceidGETCall.call(
-        id: widget.deviceID,
-        authToken: currentJwtToken,
-      ),
+      future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
+            ..complete(BackBuddyAPIGroup.apiV1DeviceidGETCall.call(
+              id: widget.deviceID,
+              authToken: currentJwtToken,
+            )))
+          .future,
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -112,7 +120,7 @@ class _EditSingleDeviceComponentWidgetState
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
                               .override(
-                                font: GoogleFonts.plusJakartaSans(
+                                font: GoogleFonts.baloo2(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .fontWeight,
@@ -208,8 +216,7 @@ class _EditSingleDeviceComponentWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
-                                                font:
-                                                    GoogleFonts.plusJakartaSans(
+                                                font: GoogleFonts.baloo2(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -482,7 +489,7 @@ class _EditSingleDeviceComponentWidgetState
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
-                                            font: GoogleFonts.plusJakartaSans(
+                                            font: GoogleFonts.baloo2(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .titleMedium
@@ -534,18 +541,27 @@ class _EditSingleDeviceComponentWidgetState
                                           child:
                                               ThresholdChangerComponentWidget(
                                             deviceID: widget.deviceID!,
-                                            sliderValue: (String threshold) {
-                                              return double.parse(
+                                            sliderValue: ((String threshold) {
+                                              return int.parse(
                                                   threshold.split(':')[1]);
                                             }(getJsonField(
                                               containerApiV1DeviceidGETResponse
                                                   .jsonBody,
                                               r'''$.threshold''',
-                                            ).toString()),
+                                            ).toString()))
+                                                .toDouble(),
                                           ),
                                         );
                                       },
                                     );
+
+                                    if (FFAppState().refreshTrigger == true) {
+                                      safeSetState(() =>
+                                          _model.apiRequestCompleter = null);
+                                      await _model.waitForApiRequestCompleted();
+                                    }
+                                    FFAppState().refreshTrigger = false;
+                                    safeSetState(() {});
                                   },
                                 ),
                               ),
@@ -643,6 +659,82 @@ class _EditSingleDeviceComponentWidgetState
                                   r'''$.online''',
                                 )),
                                 size: 24.0,
+                              ),
+                            ].divide(SizedBox(width: 12.0)),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Builder(
+                                builder: (context) => FFButtonWidget(
+                                  onPressed: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: Container(
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                0.7,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.8,
+                                            child: DeviceLogComponentWidget(
+                                              deviceId: widget.deviceID!,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  text: 'Logs',
+                                  icon: Icon(
+                                    Icons.bar_chart_rounded,
+                                    size: 15.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.baloo2(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                    elevation: 0.0,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
                               ),
                             ].divide(SizedBox(width: 12.0)),
                           ),

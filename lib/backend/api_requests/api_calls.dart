@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -30,31 +31,27 @@ class BackBuddyAPIGroup {
       ApivDeviceidPATCHNAMECall();
   static ApivDeviceidPATCHThresholdCall apivDeviceidPATCHThresholdCall =
       ApivDeviceidPATCHThresholdCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCopyCall
-      apivDeviceGETACTIVECopyCopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCopyCall();
-  static ApivDeviceGETACTIVECopyCopyCall apivDeviceGETACTIVECopyCopyCall =
-      ApivDeviceGETACTIVECopyCopyCall();
-  static ApivDeviceGETACTIVECopyCall apivDeviceGETACTIVECopyCall =
-      ApivDeviceGETACTIVECopyCall();
+  static ApiNotificationCall apiNotificationCall = ApiNotificationCall();
+  static ApivUserSearchCall apivUserSearchCall = ApivUserSearchCall();
+  static ApiGetUserCall apiGetUserCall = ApiGetUserCall();
+  static ApiGetRelationCall apiGetRelationCall = ApiGetRelationCall();
+  static ApiFollowUserCall apiFollowUserCall = ApiFollowUserCall();
+  static ApiUnfollowUserCall apiUnfollowUserCall = ApiUnfollowUserCall();
+  static ApiReportFeedGETCall apiReportFeedGETCall = ApiReportFeedGETCall();
+  static ApiReportLikeCall apiReportLikeCall = ApiReportLikeCall();
+  static ApiGetFollowersCall apiGetFollowersCall = ApiGetFollowersCall();
+  static ApiReportSingleUserCall apiReportSingleUserCall =
+      ApiReportSingleUserCall();
+  static ApiReportGetStreakCall apiReportGetStreakCall =
+      ApiReportGetStreakCall();
+  static ApiGetFollowingCall apiGetFollowingCall = ApiGetFollowingCall();
+  static ApiCreateReportCall apiCreateReportCall = ApiCreateReportCall();
+  static ApiReportLikesCall apiReportLikesCall = ApiReportLikesCall();
+  static ApivReportEditCall apivReportEditCall = ApivReportEditCall();
+  static ApiReportGetCall apiReportGetCall = ApiReportGetCall();
+  static ApivReportDeleteCall apivReportDeleteCall = ApivReportDeleteCall();
+  static ApiDeviceLogsCall apiDeviceLogsCall = ApiDeviceLogsCall();
+  static ApiDeviceLogCall apiDeviceLogCall = ApiDeviceLogCall();
   static ApiV1DevicePOSTCall apiV1DevicePOSTCall = ApiV1DevicePOSTCall();
 }
 
@@ -180,6 +177,7 @@ class ApivDeviceGETACTIVECall {
 class ApivDeviceGETCall {
   Future<ApiCallResponse> call({
     int? size = 10,
+    int? page = 1,
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -195,6 +193,7 @@ class ApivDeviceGETCall {
       },
       params: {
         'Size': size,
+        'Page': page,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -204,6 +203,16 @@ class ApivDeviceGETCall {
       alwaysAllowBody: false,
     );
   }
+
+  List<String>? deviceNames(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApivDeviceidPATCHNAMECall {
@@ -242,7 +251,7 @@ class ApivDeviceidPATCHNAMECall {
 
 class ApivDeviceidPATCHThresholdCall {
   Future<ApiCallResponse> call({
-    double? threshold = 10,
+    String? threshold = '\"00:10:00\"',
     String? id = '\"\"',
     String? authToken = '',
   }) async {
@@ -252,7 +261,7 @@ class ApivDeviceidPATCHThresholdCall {
 
     final ffApiRequestBody = '''
 {
-  "threshold": "00:${threshold}:00"
+  "threshold": "${escapeStringForJson(threshold)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'apivDeviceid PATCH Threshold',
@@ -274,10 +283,44 @@ class ApivDeviceidPATCHThresholdCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
+class ApiNotificationCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? fcmToken = '\"\"',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+"fcmToken": "${escapeStringForJson(fcmToken)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'api Notification',
+      apiUrl: '${baseUrl}/api/v1/Notification',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApivUserSearchCall {
+  Future<ApiCallResponse> call({
+    int? limit,
+    String? searchTerm = '10',
+    String? expandType = 'None',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -285,16 +328,16 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName:
-          'apivDevice GET ACTIVE Copy Copy Copy Copy Copy Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'apivUser Search',
+      apiUrl: '${baseUrl}/api/v1/User/Search',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
-        'Size': size,
-        'Active': active,
+        'Limit': limit,
+        'SearchTerm': searchTerm,
+        'expandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -306,10 +349,10 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
+class ApiGetUserCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? userId = '',
+    String? expandType = 'None',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -317,16 +360,14 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName:
-          'apivDevice GET ACTIVE Copy Copy Copy Copy Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api GetUser',
+      apiUrl: '${baseUrl}/api/v1/User/${userId}',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
-        'Size': size,
-        'Active': active,
+        'expandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -338,10 +379,9 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall {
+class ApiGetRelationCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? userId = '',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -349,15 +389,100 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy Copy Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api GetRelation',
+      apiUrl: '${baseUrl}/api/v1/User/${userId}/relation',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiFollowUserCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api FollowUser',
+      apiUrl: '${baseUrl}/api/v1/user/${userId}/follow',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiUnfollowUserCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api UnfollowUser',
+      apiUrl: '${baseUrl}/api/v1/user/${userId}/follow',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiReportFeedGETCall {
+  Future<ApiCallResponse> call({
+    int? size = 10,
+    int? page = 1,
+    String? expandType = 'None',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api ReportFeed GET',
+      apiUrl: '${baseUrl}/api/v1/Report/feed',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
         'Size': size,
-        'Active': active,
+        'Page': page,
+        'ExpandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -369,10 +494,9 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall {
+class ApiReportLikeCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? reportId = '',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -380,15 +504,48 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api Report Like',
+      apiUrl: '${baseUrl}/api/v1/Report/${reportId}/like',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiGetFollowersCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    int? size = 10,
+    int? page = 1,
+    String? expandType = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api get Followers',
+      apiUrl: '${baseUrl}/api/v1/User/${userId}/followers',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
+        'userId': userId,
         'Size': size,
-        'Active': active,
+        'Page': page,
+        'expandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -400,10 +557,12 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall {
+class ApiReportSingleUserCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? userId = '',
+    int? size,
+    int? page,
+    String? expandType = 'Creator',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -411,15 +570,17 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api Report single user',
+      apiUrl: '${baseUrl}/api/v1/Report',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
-        'Size': size,
-        'Active': active,
+        'userId': userId,
+        'size': size,
+        'page': page,
+        'expandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -431,10 +592,13 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCall {
+class ApiReportGetStreakCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? userId = '',
+    int? size,
+    int? page,
+    String? expandType = 'Creator',
+    String? startTime = '',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -442,15 +606,18 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api Report get streak',
+      apiUrl: '${baseUrl}/api/v1/Report',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
-        'Size': size,
-        'Active': active,
+        'userId': userId,
+        'size': size,
+        'page': page,
+        'expandType': expandType,
+        'startTime': startTime,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -462,10 +629,12 @@ class ApivDeviceGETACTIVECopyCopyCopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCopyCall {
+class ApiGetFollowingCall {
   Future<ApiCallResponse> call({
+    String? userId = '',
     int? size = 10,
-    bool? active,
+    int? page = 1,
+    String? expandType = 'Relations',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -473,15 +642,16 @@ class ApivDeviceGETACTIVECopyCopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api get Following',
+      apiUrl: '${baseUrl}/api/v1/User/${userId}/following',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
         'Size': size,
-        'Active': active,
+        'page': page,
+        'expandType': expandType,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -493,10 +663,52 @@ class ApivDeviceGETACTIVECopyCopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCopyCall {
+class ApiCreateReportCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? visibilityType = '',
+    String? deviceId = '',
+    String? startTime = '',
+    String? endTime = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "name": "${escapeStringForJson(name)}",
+  "visibilityType": "${escapeStringForJson(visibilityType)}",
+  "deviceId": "${escapeStringForJson(deviceId)}",
+  "startTime": "${escapeStringForJson(startTime)}",
+  "endTime": "${escapeStringForJson(endTime)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'api createReport',
+      apiUrl: '${baseUrl}/api/v1/Report',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiReportLikesCall {
   Future<ApiCallResponse> call({
     int? size = 10,
-    bool? active,
+    int? page = 1,
+    String? reportId = '',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -504,15 +716,15 @@ class ApivDeviceGETACTIVECopyCopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api Report Likes',
+      apiUrl: '${baseUrl}/api/v1/Report/${reportId}/likes',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
         'Size': size,
-        'Active': active,
+        'Page': page,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -524,10 +736,46 @@ class ApivDeviceGETACTIVECopyCopyCall {
   }
 }
 
-class ApivDeviceGETACTIVECopyCall {
+class ApivReportEditCall {
   Future<ApiCallResponse> call({
-    int? size = 10,
-    bool? active,
+    String? reportId = '',
+    String? name = '',
+    String? visibilityType = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "name": "${escapeStringForJson(name)}",
+  "visibilityType": "${escapeStringForJson(visibilityType)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'apivReport edit',
+      apiUrl: '${baseUrl}/api/v1/Report/${reportId}',
+      callType: ApiCallType.PATCH,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiReportGetCall {
+  Future<ApiCallResponse> call({
+    String? reportId = '',
+    String? expandType = '',
     String? authToken = '',
   }) async {
     final baseUrl = BackBuddyAPIGroup.getBaseUrl(
@@ -535,16 +783,102 @@ class ApivDeviceGETACTIVECopyCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'apivDevice GET ACTIVE Copy',
-      apiUrl: '${baseUrl}/api/v1/Device',
+      callName: 'api Report get',
+      apiUrl: '${baseUrl}/api/v1/Report/${reportId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {
+        'expandType': expandType,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApivReportDeleteCall {
+  Future<ApiCallResponse> call({
+    String? reportId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'apivReport delete',
+      apiUrl: '${baseUrl}/api/v1/Report/${reportId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiDeviceLogsCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+    int? page = 1,
+    int? size = 10,
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api DeviceLogs',
+      apiUrl: '${baseUrl}/api/v1/Device/${deviceId}/DeviceLog',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
       },
       params: {
         'Size': size,
-        'Active': active,
+        'Page': page,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ApiDeviceLogCall {
+  Future<ApiCallResponse> call({
+    String? deviceId = '',
+    String? logId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = BackBuddyAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'api DeviceLog',
+      apiUrl: '${baseUrl}/api/v1/Device/${deviceId}/DeviceLog/${logId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

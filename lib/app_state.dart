@@ -25,4 +25,10 @@ class FFAppState extends ChangeNotifier {
   set refreshTrigger(bool value) {
     _refreshTrigger = value;
   }
+
+  bool _reportDeleted = false;
+  bool get reportDeleted => _reportDeleted;
+  set reportDeleted(bool value) {
+    _reportDeleted = value;
+  }
 }

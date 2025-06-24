@@ -88,7 +88,7 @@ class _ConfirmDeviceDeleteComponentWidgetState
                   child: Text(
                     'Confirm Delete',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
-                          font: GoogleFonts.plusJakartaSans(
+                          font: GoogleFonts.baloo2(
                             fontWeight: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .fontWeight,
@@ -120,6 +120,7 @@ class _ConfirmDeviceDeleteComponentWidgetState
                                 .bodyMedium
                                 .fontStyle,
                           ),
+                          color: FlutterFlowTheme.of(context).secondaryText,
                           letterSpacing: 0.0,
                           fontWeight: FlutterFlowTheme.of(context)
                               .bodyMedium
@@ -204,7 +205,7 @@ class _ConfirmDeviceDeleteComponentWidgetState
                           }
                           Navigator.pop(context);
                           FFAppState().refreshTrigger = false;
-                          _model.updatePage(() {});
+                          safeSetState(() {});
 
                           safeSetState(() {});
                         },
@@ -215,26 +216,27 @@ class _ConfirmDeviceDeleteComponentWidgetState
                           padding: EdgeInsets.all(8.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).error,
-                          textStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context).info,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
                           elevation: 0.0,
                           borderSide: BorderSide(
                             color: Colors.transparent,

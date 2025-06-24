@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'threshold_changer_component_model.dart';
@@ -122,7 +123,7 @@ class _ThresholdChangerComponentWidgetState
                       '10',
                     ),
                     style: FlutterFlowTheme.of(context).titleMedium.override(
-                          font: GoogleFonts.plusJakartaSans(
+                          font: GoogleFonts.baloo2(
                             fontWeight: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .fontWeight,
@@ -208,9 +209,12 @@ class _ThresholdChangerComponentWidgetState
                           .call(
                         authToken: currentJwtToken,
                         id: widget.deviceID,
-                        threshold: _model.sliderValue,
+                        threshold:
+                            functions.thresholdFormatter(_model.sliderValue),
                       );
 
+                      FFAppState().refreshTrigger = true;
+                      FFAppState().update(() {});
                       Navigator.pop(context);
 
                       safeSetState(() {});
@@ -233,7 +237,7 @@ class _ThresholdChangerComponentWidgetState
                                       .bodyMedium
                                       .fontStyle,
                                 ),
-                                color: FlutterFlowTheme.of(context).info,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 letterSpacing: 0.0,
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .bodyMedium

@@ -109,7 +109,7 @@ class _RenderListOfDevicesComponentWidgetState
               title: Text(
                 widget.name!,
                 style: FlutterFlowTheme.of(context).titleLarge.override(
-                      font: GoogleFonts.plusJakartaSans(
+                      font: GoogleFonts.baloo2(
                         fontWeight:
                             FlutterFlowTheme.of(context).titleLarge.fontWeight,
                         fontStyle:
@@ -158,7 +158,7 @@ class _RenderListOfDevicesComponentWidgetState
               fillColor: FlutterFlowTheme.of(context).error,
               icon: Icon(
                 Icons.delete,
-                color: FlutterFlowTheme.of(context).info,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 24.0,
               ),
               onPressed: () async {

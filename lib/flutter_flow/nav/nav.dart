@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -74,14 +78,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? BackBuddyHomeWidget() : LoginPageWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? BackBuddyHomeFeedWidget()
+          : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? BackBuddyHomeWidget()
+              ? BackBuddyHomeFeedWidget()
               : LoginPageWidget(),
         ),
         FFRoute(
@@ -103,6 +108,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: BackBuddyHomeWidget.routeName,
           path: BackBuddyHomeWidget.routePath,
           builder: (context, params) => BackBuddyHomeWidget(),
+        ),
+        FFRoute(
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
+        ),
+        FFRoute(
+          name: BackBuddyUserSearchWidget.routeName,
+          path: BackBuddyUserSearchWidget.routePath,
+          builder: (context, params) => BackBuddyUserSearchWidget(),
+        ),
+        FFRoute(
+          name: ProfilePageWidget.routeName,
+          path: ProfilePageWidget.routePath,
+          builder: (context, params) => ProfilePageWidget(
+            userId: params.getParam(
+              'userId',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: BackBuddyHomeFeedWidget.routeName,
+          path: BackBuddyHomeFeedWidget.routePath,
+          builder: (context, params) => BackBuddyHomeFeedWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -222,6 +252,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -240,6 +271,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -288,13 +320,13 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.transparent,
+                  color: Color(0xFF1D9899),
                   child: Image.asset(
-                    'assets/images/ChatGPT_Image_9._Apr._2025,_23_10_20.png',
-                    fit: BoxFit.cover,
+                    'assets/images/Logo.png',
+                    fit: BoxFit.contain,
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
